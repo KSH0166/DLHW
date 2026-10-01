@@ -10,13 +10,15 @@ function checkAnswer(answer) {
 
         score++;
 
-        // 정답을 맞히면 다음 문제 버튼 표시
+        // 발음 버튼 표시
+        document.getElementById("soundButton").style.display =
+            "block";
+
         document.getElementById("nextButton").style.display =
             "block";
 
     } else {
 
-        // 첫 번째 오답이면 한 번 더 기회
         if (!question.tried) {
 
             document.getElementById("feedback").innerText =
@@ -26,7 +28,6 @@ function checkAnswer(answer) {
 
         } else {
 
-            // 두 번째에도 틀리면 정답 알려주기
             document.getElementById("feedback").innerText =
                 "정답은 " + question.answer + "이야!";
 
