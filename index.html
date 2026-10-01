@@ -85,10 +85,6 @@
             background-color: #eef3ff;
         }
 
-        .answer-button:hover {
-            background-color: #dce7ff;
-        }
-
         .hidden {
             display: none;
         }
@@ -98,6 +94,11 @@
             font-weight: bold;
             color: #3157a4;
             margin: 25px 0 10px;
+        }
+
+        .level-label {
+            color: #777;
+            font-size: 15px;
         }
 
         .meaning {
@@ -159,6 +160,13 @@
             font-size: 14px;
             padding: 8px 12px;
         }
+
+        .choice-description {
+            color: #777;
+            font-size: 14px;
+            margin-top: -5px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 
@@ -168,140 +176,125 @@
 
     <!-- HOME -->
     <div id="homeScreen">
-        <h1>Become an English<br>Vocabulary Genius!</h1>
-        <p>영어 단어를 재미있게 공부해 보세요.</p>
 
-        <button class="menu-button" onclick="showStudyLevel()">
+        <h1>Become an English<br>Vocabulary Genius!</h1>
+
+        <p>
+            단어를 공부하고<br>
+            Practice를 통해 실력을 확인해 보세요.
+        </p>
+
+        <button class="menu-button" onclick="showStudy()">
             📚 Word Study
         </button>
 
-        <button class="menu-button" onclick="showPracticeLevel()">
+        <button class="menu-button" onclick="showPracticeType()">
             📝 Practice
         </button>
 
         <button class="menu-button" onclick="showFavorites()">
             ⭐ Favorites
         </button>
+
     </div>
 
 
-    <!-- STUDY LEVEL -->
-    <div id="studyLevelScreen" class="hidden">
-        <h2>📚 Word Study</h2>
-        <p>공부할 레벨을 선택하세요.</p>
-
-        <button class="level-button" onclick="startStudy(1)">
-            ★ Level 1
-        </button>
-
-        <button class="level-button" onclick="startStudy(2)">
-            ★★ Level 2
-        </button>
-
-        <button class="level-button" onclick="startStudy(3)">
-            ★★★ Level 3
-        </button>
-
-        <button class="level-button" onclick="startStudy(4)">
-            ★★★★ Level 4
-        </button>
-
-        <button class="level-button" onclick="startStudy(5)">
-            ★★★★★ Level 5
-        </button>
-
-        <br>
-
-        <button onclick="goHome()">← Home</button>
-    </div>
-
-
-    <!-- STUDY -->
+    <!-- WORD STUDY -->
     <div id="studyScreen" class="hidden">
 
         <div class="progress" id="studyProgress"></div>
 
+        <div class="level-label" id="studyLevel"></div>
+
         <div class="word" id="studyWord"></div>
 
-        <button class="favorite" id="favoriteButton" onclick="toggleFavorite()">
+        <button class="favorite"
+                id="favoriteButton"
+                onclick="toggleFavorite()">
             ☆
         </button>
 
         <div class="meaning" id="studyMeaning"></div>
 
         <div class="example">
+
             <strong>Example</strong>
+
             <p id="studyExample"></p>
+
             <p id="studyExampleMeaning"></p>
+
         </div>
 
-        <button class="speaker-button" onclick="speakWord()">
+        <button class="speaker-button"
+                onclick="speakStudyWord()">
             🔊 단어 듣기
         </button>
 
-        <button class="speaker-button" onclick="speakExample()">
+        <button class="speaker-button"
+                onclick="speakStudyExample()">
             🔊 예문 듣기
         </button>
 
         <br>
 
-        <button onclick="previousStudy()">← 이전</button>
-        <button onclick="nextStudy()">다음 →</button>
-
-        <br>
-
-        <button onclick="goHome()">🏠 Home</button>
-    </div>
-
-
-    <!-- PRACTICE LEVEL -->
-    <div id="practiceLevelScreen" class="hidden">
-        <h2>📝 Practice</h2>
-        <p>연습할 레벨을 선택하세요.</p>
-
-        <button class="level-button" onclick="choosePracticeType(1)">
-            ★ Level 1
+        <button onclick="previousStudy()">
+            ← 이전
         </button>
 
-        <button class="level-button" onclick="choosePracticeType(2)">
-            ★★ Level 2
-        </button>
-
-        <button class="level-button" onclick="choosePracticeType(3)">
-            ★★★ Level 3
-        </button>
-
-        <button class="level-button" onclick="choosePracticeType(4)">
-            ★★★★ Level 4
-        </button>
-
-        <button class="level-button" onclick="choosePracticeType(5)">
-            ★★★★★ Level 5
+        <button onclick="nextStudy()">
+            다음 →
         </button>
 
         <br>
 
-        <button onclick="goHome()">← Home</button>
+        <button onclick="goHome()">
+            🏠 Home
+        </button>
+
     </div>
 
 
     <!-- PRACTICE TYPE -->
     <div id="practiceTypeScreen" class="hidden">
-        <h2>무엇을 공부할까요?</h2>
 
-        <button class="menu-button" onclick="startPractice('engToKor')">
+        <h2>📝 Practice</h2>
+
+        <p>
+            어떤 방식으로 공부할까요?
+        </p>
+
+        <button class="menu-button"
+                onclick="startPractice('engToKor')">
             🇺🇸 영어 → 뜻
         </button>
 
-        <button class="menu-button" onclick="startPractice('korToEng')">
+        <p class="choice-description">
+            영어 단어를 보고 한국어 뜻을 고릅니다.
+        </p>
+
+        <button class="menu-button"
+                onclick="startPractice('korToEng')">
             🇰🇷 뜻 → 영어
         </button>
 
-        <button class="menu-button" onclick="startPractice('both')">
+        <p class="choice-description">
+            한국어 뜻을 보고 영어 단어를 고릅니다.
+        </p>
+
+        <button class="menu-button"
+                onclick="startPractice('both')">
             🔄 둘 다
         </button>
 
-        <button onclick="goHome()">← Home</button>
+        <p class="choice-description">
+            영어 → 뜻과 뜻 → 영어를 모두 연습합니다.
+        </p>
+
+        <button onclick="goHome()">
+            ← Home
+        </button>
+
     </div>
 
 
@@ -310,27 +303,28 @@
 
         <div class="progress" id="practiceProgress"></div>
 
+        <div class="level-label" id="practiceLevel"></div>
+
         <h2 id="practiceQuestion"></h2>
 
         <div id="answerButtons"></div>
 
         <div class="feedback" id="feedback"></div>
 
-        <button
-            class="speaker-button hidden"
-            id="soundButton"
-            onclick="speakCurrentWord()">
+        <button class="speaker-button hidden"
+                id="soundButton"
+                onclick="speakPracticeWord()">
             🔊 단어 듣기
         </button>
 
         <br>
 
-        <button
-            class="menu-button hidden"
-            id="nextButton"
-            onclick="nextPractice()">
+        <button class="menu-button hidden"
+                id="nextButton"
+                onclick="nextPractice()">
             다음 문제 →
         </button>
+
     </div>
 
 
@@ -345,18 +339,17 @@
 
         <div id="wrongWords"></div>
 
-        <button
-            class="menu-button"
-            id="retryWrongButton"
-            onclick="retryWrongWords()">
+        <button class="menu-button hidden"
+                id="retryWrongButton"
+                onclick="retryWrongWords()">
             🔄 틀린 단어 다시 공부하기
         </button>
 
-        <button
-            class="menu-button"
-            onclick="goHome()">
+        <button class="menu-button"
+                onclick="goHome()">
             🏠 Home
         </button>
+
     </div>
 
 
@@ -365,11 +358,16 @@
 
         <h2>⭐ Favorites</h2>
 
-        <p>헷갈리는 단어를 모아봤어요.</p>
+        <p>
+            헷갈리거나 다시 공부하고 싶은 단어를 모아볼 수 있어요.
+        </p>
 
         <div id="favoriteList"></div>
 
-        <button onclick="goHome()">🏠 Home</button>
+        <button onclick="goHome()">
+            🏠 Home
+        </button>
+
     </div>
 
 </div>
@@ -377,211 +375,107 @@
 
 <script>
 
-    // ==========================
-    // VOCABULARY
-    // ==========================
+    // ==========================================
+    // 전체 단어
+    // 총 5개만 있음!
+    // ==========================================
 
-    const vocabulary = {
+    const vocabulary = [
 
-        1: [
-            {
-                word: "small",
-                meaning: "작은",
-                example: "I have a small dog.",
-                exampleMeaning: "나는 작은 강아지를 가지고 있다."
-            },
-            {
-                word: "cold",
-                meaning: "추운",
-                example: "It is very cold today.",
-                exampleMeaning: "오늘은 매우 춥다."
-            },
-            {
-                word: "clean",
-                meaning: "깨끗한",
-                example: "My room is clean.",
-                exampleMeaning: "내 방은 깨끗하다."
-            },
-            {
-                word: "strong",
-                meaning: "강한",
-                example: "He is very strong.",
-                exampleMeaning: "그는 매우 강하다."
-            },
-            {
-                word: "quiet",
-                meaning: "조용한",
-                example: "The library is quiet.",
-                exampleMeaning: "도서관은 조용하다."
-            }
-        ],
+        {
+            level: 1,
+            word: "small",
+            meaning: "작은",
+            example: "I have a small dog.",
+            exampleMeaning: "나는 작은 강아지를 가지고 있다."
+        },
 
-        2: [
-            {
-                word: "borrow",
-                meaning: "빌리다",
-                example: "Can I borrow your pen?",
-                exampleMeaning: "네 펜을 빌려도 될까?"
-            },
-            {
-                word: "invite",
-                meaning: "초대하다",
-                example: "I will invite my friend.",
-                exampleMeaning: "나는 친구를 초대할 것이다."
-            },
-            {
-                word: "continue",
-                meaning: "계속하다",
-                example: "Please continue your work.",
-                exampleMeaning: "계속 일을 해 주세요."
-            },
-            {
-                word: "discover",
-                meaning: "발견하다",
-                example: "They discovered a new place.",
-                exampleMeaning: "그들은 새로운 장소를 발견했다."
-            },
-            {
-                word: "describe",
-                meaning: "묘사하다",
-                example: "Can you describe the picture?",
-                exampleMeaning: "그 그림을 묘사할 수 있니?"
-            }
-        ],
+        {
+            level: 2,
+            word: "borrow",
+            meaning: "빌리다",
+            example: "Can I borrow your pen?",
+            exampleMeaning: "네 펜을 빌려도 될까?"
+        },
 
-        3: [
-            {
-                word: "consume",
-                meaning: "소비하다",
-                example: "People consume a lot of water.",
-                exampleMeaning: "사람들은 많은 물을 소비한다."
-            },
-            {
-                word: "respond",
-                meaning: "응답하다",
-                example: "Please respond to my message.",
-                exampleMeaning: "내 메시지에 응답해 주세요."
-            },
-            {
-                word: "maintain",
-                meaning: "유지하다",
-                example: "We should maintain good habits.",
-                exampleMeaning: "우리는 좋은 습관을 유지해야 한다."
-            },
-            {
-                word: "reduce",
-                meaning: "줄이다",
-                example: "We need to reduce waste.",
-                exampleMeaning: "우리는 쓰레기를 줄여야 한다."
-            },
-            {
-                word: "influence",
-                meaning: "영향을 미치다",
-                example: "Friends can influence our choices.",
-                exampleMeaning: "친구들은 우리의 선택에 영향을 줄 수 있다."
-            }
-        ],
+        {
+            level: 3,
+            word: "maintain",
+            meaning: "유지하다",
+            example: "We should maintain good habits.",
+            exampleMeaning: "우리는 좋은 습관을 유지해야 한다."
+        },
 
-        4: [
-            {
-                word: "essential",
-                meaning: "필수적인",
-                example: "Water is essential for life.",
-                exampleMeaning: "물은 생명에 필수적이다."
-            },
-            {
-                word: "accurate",
-                meaning: "정확한",
-                example: "The information is accurate.",
-                exampleMeaning: "그 정보는 정확하다."
-            },
-            {
-                word: "interpret",
-                meaning: "해석하다",
-                example: "We need to interpret the sentence.",
-                exampleMeaning: "우리는 그 문장을 해석해야 한다."
-            },
-            {
-                word: "sufficient",
-                meaning: "충분한",
-                example: "We have sufficient time.",
-                exampleMeaning: "우리는 충분한 시간이 있다."
-            },
-            {
-                word: "distinguish",
-                meaning: "구별하다",
-                example: "Can you distinguish the two words?",
-                exampleMeaning: "두 단어를 구별할 수 있니?"
-            }
-        ],
+        {
+            level: 4,
+            word: "sufficient",
+            meaning: "충분한",
+            example: "We have sufficient time.",
+            exampleMeaning: "우리는 충분한 시간이 있다."
+        },
 
-        5: [
-            {
-                word: "coherent",
-                meaning: "일관성 있는",
-                example: "Her argument is coherent.",
-                exampleMeaning: "그녀의 주장은 일관성이 있다."
-            },
-            {
-                word: "allocate",
-                meaning: "할당하다",
-                example: "We need to allocate more time.",
-                exampleMeaning: "우리는 더 많은 시간을 할당해야 한다."
-            },
-            {
-                word: "controversial",
-                meaning: "논란이 많은",
-                example: "The topic is controversial.",
-                exampleMeaning: "그 주제는 논란이 많다."
-            },
-            {
-                word: "undergo",
-                meaning: "겪다",
-                example: "She had to undergo surgery.",
-                exampleMeaning: "그녀는 수술을 받아야 했다."
-            },
-            {
-                word: "facilitate",
-                meaning: "촉진하다",
-                example: "Technology can facilitate learning.",
-                exampleMeaning: "기술은 학습을 촉진할 수 있다."
-            }
-        ]
-    };
+        {
+            level: 5,
+            word: "facilitate",
+            meaning: "촉진하다",
+            example: "Technology can facilitate learning.",
+            exampleMeaning: "기술은 학습을 촉진할 수 있다."
+        }
+
+    ];
 
 
-    // ==========================
-    // VARIABLES
-    // ==========================
+    // ==========================================
+    // 변수
+    // ==========================================
 
-    let currentLevel = 1;
     let currentStudyIndex = 0;
 
     let currentPracticeIndex = 0;
-    let practiceType = "";
+
     let practiceQuestions = [];
 
+    let practiceType = "";
+
     let score = 0;
+
     let wrongWords = [];
+
     let tried = false;
 
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let favorites =
+        JSON.parse(localStorage.getItem("favorites")) || [];
 
 
-    // ==========================
-    // SCREEN CONTROL
-    // ==========================
+    // ==========================================
+    // 화면 관리
+    // ==========================================
 
     function hideAllScreens() {
 
-        document.getElementById("homeScreen").classList.add("hidden");
-        document.getElementById("studyLevelScreen").classList.add("hidden");
-        document.getElementById("studyScreen").classList.add("hidden");
-        document.getElementById("practiceLevelScreen").classList.add("hidden");
-        document.getElementById("practiceTypeScreen").classList.add("hidden");
-        document.getElementById("practiceScreen").classList.add("hidden");
-        document.getElementById("resultScreen").classList.add("hidden");
-        document.getElementById("favoritesScreen").classList.add("hidden");
+        document
+            .getElementById("homeScreen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("studyScreen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("practiceTypeScreen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("practiceScreen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("resultScreen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("favoritesScreen")
+            .classList.add("hidden");
     }
 
 
@@ -589,27 +483,18 @@
 
         hideAllScreens();
 
-        document.getElementById("homeScreen").classList.remove("hidden");
-    }
-
-
-    // ==========================
-    // WORD STUDY
-    // ==========================
-
-    function showStudyLevel() {
-
-        hideAllScreens();
-
         document
-            .getElementById("studyLevelScreen")
+            .getElementById("homeScreen")
             .classList.remove("hidden");
     }
 
 
-    function startStudy(level) {
+    // ==========================================
+    // WORD STUDY
+    // ==========================================
 
-        currentLevel = level;
+    function showStudy() {
+
         currentStudyIndex = 0;
 
         hideAllScreens();
@@ -624,22 +509,33 @@
 
     function showStudyWord() {
 
-        const word = vocabulary[currentLevel][currentStudyIndex];
+        const word =
+            vocabulary[currentStudyIndex];
+
 
         document.getElementById("studyProgress").innerText =
-            `${currentStudyIndex + 1} / ${vocabulary[currentLevel].length}`;
+            `${currentStudyIndex + 1} / ${vocabulary.length}`;
+
+
+        document.getElementById("studyLevel").innerText =
+            `★ Level ${word.level}`;
+
 
         document.getElementById("studyWord").innerText =
             word.word;
 
+
         document.getElementById("studyMeaning").innerText =
             word.meaning;
+
 
         document.getElementById("studyExample").innerText =
             word.example;
 
+
         document.getElementById("studyExampleMeaning").innerText =
             word.exampleMeaning;
+
 
         updateFavoriteButton();
     }
@@ -647,14 +543,16 @@
 
     function nextStudy() {
 
-        if (
-            currentStudyIndex <
-            vocabulary[currentLevel].length - 1
-        ) {
+        if (currentStudyIndex < vocabulary.length - 1) {
+
             currentStudyIndex++;
+
             showStudyWord();
+
         } else {
-            alert("이 레벨의 단어를 모두 공부했어요! 🎉");
+
+            alert("모든 단어를 공부했어요! 🎉");
+
         }
     }
 
@@ -662,92 +560,87 @@
     function previousStudy() {
 
         if (currentStudyIndex > 0) {
+
             currentStudyIndex--;
+
             showStudyWord();
+
         }
     }
 
 
-    // ==========================
-    // SPEECH
-    // ==========================
+    // ==========================================
+    // 발음
+    // ==========================================
 
-    function speakWord() {
+    function speak(text) {
 
-        const word =
-            vocabulary[currentLevel][currentStudyIndex].word;
+        window.speechSynthesis.cancel();
 
         const speech =
-            new SpeechSynthesisUtterance(word);
+            new SpeechSynthesisUtterance(text);
 
         speech.lang = "en-US";
+
         speech.rate = 0.8;
+
+        speech.pitch = 1;
 
         window.speechSynthesis.speak(speech);
     }
 
 
-    function speakExample() {
+    function speakStudyWord() {
 
-        const example =
-            vocabulary[currentLevel][currentStudyIndex].example;
-
-        const speech =
-            new SpeechSynthesisUtterance(example);
-
-        speech.lang = "en-US";
-        speech.rate = 0.8;
-
-        window.speechSynthesis.speak(speech);
+        speak(
+            vocabulary[currentStudyIndex].word
+        );
     }
 
 
-    function speakCurrentWord() {
+    function speakStudyExample() {
 
-        const word =
-            practiceQuestions[currentPracticeIndex].word;
-
-        const speech =
-            new SpeechSynthesisUtterance(word);
-
-        speech.lang = "en-US";
-        speech.rate = 0.8;
-
-        window.speechSynthesis.speak(speech);
+        speak(
+            vocabulary[currentStudyIndex].example
+        );
     }
 
 
-    // ==========================
+    function speakPracticeWord() {
+
+        speak(
+            practiceQuestions[currentPracticeIndex].word
+        );
+    }
+
+
+    // ==========================================
     // FAVORITES
-    // ==========================
-
-    function getFavoriteKey(word) {
-
-        return word.word;
-    }
-
+    // ==========================================
 
     function toggleFavorite() {
 
         const word =
-            vocabulary[currentLevel][currentStudyIndex];
+            vocabulary[currentStudyIndex].word;
 
-        const key = getFavoriteKey(word);
 
-        if (favorites.includes(key)) {
+        if (favorites.includes(word)) {
 
             favorites =
-                favorites.filter(item => item !== key);
+                favorites.filter(item => item !== word);
 
         } else {
 
-            favorites.push(key);
+            favorites.push(word);
+
         }
+
 
         localStorage.setItem(
             "favorites",
             JSON.stringify(favorites)
         );
+
 
         updateFavoriteButton();
     }
@@ -756,21 +649,20 @@
     function updateFavoriteButton() {
 
         const word =
-            vocabulary[currentLevel][currentStudyIndex];
+            vocabulary[currentStudyIndex].word;
 
-        const key = getFavoriteKey(word);
 
-        if (favorites.includes(key)) {
+        if (favorites.includes(word)) {
 
-            document.getElementById(
-                "favoriteButton"
-            ).innerText = "★";
+            document
+                .getElementById("favoriteButton")
+                .innerText = "★";
 
         } else {
 
-            document.getElementById(
-                "favoriteButton"
-            ).innerText = "☆";
+            document
+                .getElementById("favoriteButton")
+                .innerText = "☆";
         }
     }
 
@@ -783,10 +675,13 @@
             .getElementById("favoritesScreen")
             .classList.remove("hidden");
 
+
         const list =
             document.getElementById("favoriteList");
 
+
         list.innerHTML = "";
+
 
         if (favorites.length === 0) {
 
@@ -799,65 +694,65 @@
 
         favorites.forEach(function(wordName) {
 
-            let foundWord = null;
+            const word =
+                vocabulary.find(
+                    item => item.word === wordName
+                );
 
-            for (let level in vocabulary) {
 
-                const result =
-                    vocabulary[level].find(
-                        item => item.word === wordName
-                    );
-
-                if (result) {
-                    foundWord = result;
-                    break;
-                }
+            if (!word) {
+                return;
             }
 
 
-            if (foundWord) {
+            const div =
+                document.createElement("div");
 
-                const div =
-                    document.createElement("div");
 
-                div.className = "favorite-word";
+            div.className =
+                "favorite-word";
 
-                div.innerHTML = `
-                    <strong>${foundWord.word}</strong>
-                    <br>
-                    ${foundWord.meaning}
-                    <br><br>
-                    ${foundWord.example}
-                    <br>
-                    ${foundWord.exampleMeaning}
-                    <br>
-                    <button
-                        class="small-button"
-                        onclick="speakFavorite('${foundWord.word}')">
-                        🔊 Listen
-                    </button>
-                    <button
-                        class="small-button"
-                        onclick="removeFavorite('${foundWord.word}')">
-                        ⭐ 즐겨찾기 해제
-                    </button>
-                `;
 
-                list.appendChild(div);
-            }
+            div.innerHTML = `
+
+                <strong>${word.word}</strong>
+
+                <br>
+
+                ★ Level ${word.level}
+
+                <br>
+
+                ${word.meaning}
+
+                <br><br>
+
+                ${word.example}
+
+                <br>
+
+                ${word.exampleMeaning}
+
+                <br>
+
+                <button
+                    class="small-button"
+                    onclick="speak('${word.word}')">
+                    🔊 Listen
+                </button>
+
+                <button
+                    class="small-button"
+                    onclick="removeFavorite('${word.word}')">
+                    ⭐ 즐겨찾기 해제
+                </button>
+
+            `;
+
+
+            list.appendChild(div);
+
         });
-    }
-
-
-    function speakFavorite(word) {
-
-        const speech =
-            new SpeechSynthesisUtterance(word);
-
-        speech.lang = "en-US";
-        speech.rate = 0.8;
-
-        window.speechSynthesis.speak(speech);
     }
 
 
@@ -866,32 +761,22 @@
         favorites =
             favorites.filter(item => item !== word);
 
+
         localStorage.setItem(
             "favorites",
             JSON.stringify(favorites)
         );
 
+
         showFavorites();
     }
 
 
-    // ==========================
+    // ==========================================
     // PRACTICE
-    // ==========================
+    // ==========================================
 
-    function showPracticeLevel() {
-
-        hideAllScreens();
-
-        document
-            .getElementById("practiceLevelScreen")
-            .classList.remove("hidden");
-    }
-
-
-    function choosePracticeType(level) {
-
-        currentLevel = level;
+    function showPracticeType() {
 
         hideAllScreens();
 
@@ -905,18 +790,26 @@
 
         practiceType = type;
 
+        /*
+            전체 5개 단어를 사용
+        */
         practiceQuestions =
-            [...vocabulary[currentLevel]];
+            [...vocabulary];
+
 
         currentPracticeIndex = 0;
+
         score = 0;
+
         wrongWords = [];
+
 
         hideAllScreens();
 
         document
             .getElementById("practiceScreen")
             .classList.remove("hidden");
+
 
         showPracticeQuestion();
     }
@@ -927,47 +820,73 @@
         const question =
             practiceQuestions[currentPracticeIndex];
 
+
         tried = false;
+
 
         document.getElementById("practiceProgress").innerText =
             `${currentPracticeIndex + 1} / ${practiceQuestions.length}`;
 
+
+        document.getElementById("practiceLevel").innerText =
+            `★ Level ${question.level}`;
+
+
         document.getElementById("feedback").innerText = "";
+
 
         document
             .getElementById("soundButton")
             .classList.add("hidden");
+
 
         document
             .getElementById("nextButton")
             .classList.add("hidden");
 
 
-        let actualType = practiceType;
+        let actualType =
+            practiceType;
+
+
+        /*
+            "둘 다"를 선택하면
+            홀수 문제 = 영어 → 뜻
+            짝수 문제 = 뜻 → 영어
+        */
 
         if (practiceType === "both") {
 
             if (currentPracticeIndex % 2 === 0) {
+
                 actualType = "engToKor";
+
             } else {
+
                 actualType = "korToEng";
+
             }
         }
 
 
         if (actualType === "engToKor") {
 
-            document.getElementById("practiceQuestion").innerText =
-                question.word;
+            document
+                .getElementById("practiceQuestion")
+                .innerText = question.word;
 
         } else {
 
-            document.getElementById("practiceQuestion").innerText =
-                question.meaning;
+            document
+                .getElementById("practiceQuestion")
+                .innerText = question.meaning;
         }
 
 
-        createAnswerButtons(actualType, question);
+        createAnswerButtons(
+            actualType,
+            question
+        );
     }
 
 
@@ -976,7 +895,9 @@
         const container =
             document.getElementById("answerButtons");
 
+
         container.innerHTML = "";
+
 
         let answers = [];
 
@@ -985,18 +906,22 @@
 
             answers.push(question.meaning);
 
+
             while (answers.length < 3) {
 
                 const randomWord =
-                    practiceQuestions[
+                    vocabulary[
                         Math.floor(
                             Math.random() *
-                            practiceQuestions.length
+                            vocabulary.length
                         )
                     ].meaning;
 
+
                 if (!answers.includes(randomWord)) {
+
                     answers.push(randomWord);
+
                 }
             }
 
@@ -1004,24 +929,30 @@
 
             answers.push(question.word);
 
+
             while (answers.length < 3) {
 
                 const randomWord =
-                    practiceQuestions[
+                    vocabulary[
                         Math.floor(
                             Math.random() *
-                            practiceQuestions.length
+                            vocabulary.length
                         )
                     ].word;
 
+
                 if (!answers.includes(randomWord)) {
+
                     answers.push(randomWord);
+
                 }
             }
         }
 
 
-        answers.sort(() => Math.random() - 0.5);
+        answers.sort(
+            () => Math.random() - 0.5
+        );
 
 
         answers.forEach(function(answer) {
@@ -1029,86 +960,141 @@
             const button =
                 document.createElement("button");
 
-            button.className = "answer-button";
 
-            button.innerText = answer;
+            button.className =
+                "answer-button";
 
-            button.onclick = function() {
 
-                checkAnswer(answer, type);
-            };
+            button.innerText =
+                answer;
+
+
+            button.onclick =
+                function() {
+
+                    checkAnswer(
+                        answer,
+                        type
+                    );
+
+                };
+
 
             container.appendChild(button);
+
         });
     }
 
+
+    // ==========================================
+    // 정답 확인
+    // ==========================================
 
     function checkAnswer(answer, type) {
 
         const question =
             practiceQuestions[currentPracticeIndex];
 
+
         let correctAnswer;
 
+
         if (type === "engToKor") {
-            correctAnswer = question.meaning;
+
+            correctAnswer =
+                question.meaning;
+
         } else {
-            correctAnswer = question.word;
+
+            correctAnswer =
+                question.word;
+
         }
 
 
         if (answer === correctAnswer) {
 
-            document.getElementById("feedback").innerText =
+            document
+                .getElementById("feedback")
+                .innerText =
                 "잘했어! 축하해! 🎉";
 
+
             if (!tried) {
+
                 score++;
+
             }
+
 
             document
                 .getElementById("soundButton")
                 .classList.remove("hidden");
 
+
             document
                 .getElementById("nextButton")
                 .classList.remove("hidden");
+
 
         } else {
 
             if (!tried) {
 
-                document.getElementById("feedback").innerText =
+                document
+                    .getElementById("feedback")
+                    .innerText =
                     "다시 시도해봐! 💪";
+
 
                 tried = true;
 
+
             } else {
 
-                document.getElementById("feedback").innerText =
-                    "정답은 " + correctAnswer + "이야!";
+                document
+                    .getElementById("feedback")
+                    .innerText =
+                    "정답은 " +
+                    correctAnswer +
+                    "이야!";
+
 
                 if (
-                    !wrongWords.includes(question.word)
+                    !wrongWords.includes(
+                        question.word
+                    )
                 ) {
-                    wrongWords.push(question.word);
+
+                    wrongWords.push(
+                        question.word
+                    );
+
                 }
+
 
                 document
                     .getElementById("soundButton")
                     .classList.remove("hidden");
 
+
                 document
                     .getElementById("nextButton")
                     .classList.remove("hidden");
+
             }
         }
     }
 
 
+    // ==========================================
+    // 다음 문제
+    // ==========================================
+
     function nextPractice() {
 
         currentPracticeIndex++;
+
 
         if (
             currentPracticeIndex <
@@ -1120,40 +1106,48 @@
         } else {
 
             showResult();
+
         }
     }
 
 
-    // ==========================
-    // RESULT
-    // ==========================
+    // ==========================================
+    // 결과
+    // ==========================================
 
     function showResult() {
 
         hideAllScreens();
 
+
         document
             .getElementById("resultScreen")
             .classList.remove("hidden");
 
-        document.getElementById("scoreText").innerText =
+
+        document
+            .getElementById("scoreText")
+            .innerText =
             `점수: ${score} / ${practiceQuestions.length}`;
 
 
-        const wrongContainer =
+        const container =
             document.getElementById("wrongWords");
 
-        wrongContainer.innerHTML = "";
+
+        container.innerHTML = "";
 
 
         if (wrongWords.length === 0) {
 
-            wrongContainer.innerHTML =
+            container.innerHTML =
                 "<p>모든 문제를 맞혔어요! 완벽해요! 🎉</p>";
+
 
             document
                 .getElementById("retryWrongButton")
                 .classList.add("hidden");
+
 
             return;
         }
@@ -1166,68 +1160,84 @@
 
         wrongWords.forEach(function(wordName) {
 
-            let foundWord = null;
+            const word =
+                vocabulary.find(
+                    item => item.word === wordName
+                );
 
-            for (let level in vocabulary) {
 
-                const result =
-                    vocabulary[level].find(
-                        item => item.word === wordName
-                    );
-
-                if (result) {
-                    foundWord = result;
-                    break;
-                }
+            if (!word) {
+                return;
             }
 
 
-            if (foundWord) {
+            const div =
+                document.createElement("div");
 
-                const div =
-                    document.createElement("div");
 
-                div.className = "wrong-word";
+            div.className =
+                "wrong-word";
 
-                div.innerHTML = `
-                    <strong>${foundWord.word}</strong>
-                    <br>
-                    ${foundWord.meaning}
-                    <br>
-                    <button
-                        class="small-button"
-                        onclick="speakFavorite('${foundWord.word}')">
-                        🔊 Listen
-                    </button>
-                `;
 
-                wrongContainer.appendChild(div);
-            }
+            div.innerHTML = `
+
+                <strong>${word.word}</strong>
+
+                <br>
+
+                ★ Level ${word.level}
+
+                <br>
+
+                ${word.meaning}
+
+                <br>
+
+                <button
+                    class="small-button"
+                    onclick="speak('${word.word}')">
+                    🔊 Listen
+                </button>
+
+            `;
+
+
+            container.appendChild(div);
+
         });
     }
 
 
-    // ==========================
-    // RETRY WRONG WORDS
-    // ==========================
+    // ==========================================
+    // 틀린 단어 다시 연습
+    // ==========================================
 
     function retryWrongWords() {
 
         practiceQuestions =
-            practiceQuestions.filter(function(word) {
+            vocabulary.filter(function(word) {
 
-                return wrongWords.includes(word.word);
+                return wrongWords.includes(
+                    word.word
+                );
+
             });
 
+
         currentPracticeIndex = 0;
+
         score = 0;
+
         wrongWords = [];
 
+
         hideAllScreens();
+
 
         document
             .getElementById("practiceScreen")
             .classList.remove("hidden");
+
 
         showPracticeQuestion();
     }
