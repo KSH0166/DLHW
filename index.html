@@ -2,67 +2,246 @@
 <html>
 
 <head>
-    <title>나의 영어단어 학습 앱</title>
+    <title>My English Vocabulary App</title>
 
-    <!-- CSS: Change how the app looks -->
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
             text-align: center;
-            margin: 50px;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .app {
+            background-color: white;
+            width: 500px;
+            margin: auto;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #3b6eea;
+        }
+
+        .progress {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .word {
+            font-size: 35px;
+            font-weight: bold;
+            margin: 25px 0;
+            color: #222;
         }
 
         button {
-            font-size: 30px;
-            padding: 15px;
-            margin: 10px;
-            background-color: lightblue;
+            display: block;
+            width: 80%;
+            margin: 12px auto;
+            padding: 14px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: #e8efff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #cddcff;
+        }
+
+        #feedback {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px;
+            min-height: 25px;
+        }
+
+        #nextButton {
+            background-color: #3b6eea;
+            color: white;
+            display: none;
+        }
+
+        #nextButton:hover {
+            background-color: #2858c7;
+        }
+
+        #result {
+            font-size: 25px;
+            font-weight: bold;
+            color: #3b6eea;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- HTML: Change what learners see -->
+    <div class="app">
 
-    <h1>Vocabulary Quiz</h1>
+        <h1>📚 Vocabulary Quiz</h1>
 
-    <p>What does "be good at" mean?</p>
+        <p class="progress" id="progress">Question 1 of 5</p>
 
-    <button onclick="checkAnswer('participate')">
-        Participate in
-    </button>
+        <div class="word" id="word">
+            participate
+        </div>
 
-    <button onclick="checkAnswer('avoid')">
-        be good at
-    </button>
+        <p>What does this word mean?</p>
 
-    <button onclick="checkAnswer('watch')">
-        Watch
-    </button>
+        <button onclick="checkAnswer('참여하다')">
+            참여하다
+        </button>
 
-    <h3 id="feedback"></h3>
+        <button onclick="checkAnswer('피하다')">
+            피하다
+        </button>
 
+        <button onclick="checkAnswer('관찰하다')">
+            관찰하다
+        </button>
 
-    <!-- JavaScript: Change what happens -->
+        <h3 id="feedback"></h3>
+
+        <button id="nextButton" onclick="nextQuestion()">
+            Next Question →
+        </button>
+
+        <p id="result"></p>
+
+    </div>
+
 
     <script>
 
+        // 5 vocabulary words
+        const questions = [
+            {
+                word: "participate",
+                answer: "참여하다",
+                choices: ["참여하다", "피하다", "관찰하다"]
+            },
+
+            {
+                word: "avoid",
+                answer: "피하다",
+                choices: ["만들다", "피하다", "기억하다"]
+            },
+
+            {
+                word: "improve",
+                answer: "향상시키다",
+                choices: ["잊다", "향상시키다", "빌리다"]
+            },
+
+            {
+                word: "require",
+                answer: "요구하다",
+                choices: ["요구하다", "설명하다", "선택하다"]
+            },
+
+            {
+                word: "achieve",
+                answer: "성취하다",
+                choices: ["성취하다", "실패하다", "기다리다"]
+            }
+        ];
+
+
+        let currentQuestion = 0;
+        let score = 0;
+
+
+        function showQuestion() {
+
+            const question = questions[currentQuestion];
+
+            document.getElementById("word").innerText = question.word;
+
+            document.getElementById("progress").innerText =
+                "Question " + (currentQuestion + 1) + " of 5";
+
+            document.getElementById("feedback").innerText = "";
+
+            document.getElementById("nextButton").style.display = "none";
+
+            const buttons = document.querySelectorAll(".app button");
+
+            buttons.forEach(function(button) {
+
+                if (button.id !== "nextButton") {
+                    button.innerText =
+                        question.choices[Array.from(buttons).indexOf(button)];
+
+                    button.onclick = function() {
+                        checkAnswer(this.innerText);
+                    };
+                }
+
+            });
+        }
+
+
         function checkAnswer(answer) {
 
-            if (answer === "be good at") {
+            const question = questions[currentQuestion];
+
+            if (answer === question.answer) {
+
                 document.getElementById("feedback").innerText =
-                    "잘했어!!";
+                    "✅ Correct! Well done!";
+
+                score++;
+
             }
 
             else {
+
                 document.getElementById("feedback").innerText =
-                    " 틀렸어 ㅠㅠ 다시 해봐";
+                    "❌ Incorrect. The answer is " + question.answer + ".";
+
             }
 
+            document.getElementById("nextButton").style.display = "block";
+
         }
+
+
+        function nextQuestion() {
+
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+
+                showQuestion();
+
+            }
+
+            else {
+
+                document.getElementById("word").innerText = "🎉 Quiz Complete!";
+
+                document.getElementById("progress").innerText = "";
+
+                document.getElementById("feedback").innerText = "";
+
+                document.getElementById("nextButton").style.display = "none";
+
+                document.getElementById("result").innerText =
+                    "Your score: " + score + " / 5";
+
+            }
+        }
+
+
+        showQuestion();
 
     </script>
 
 </body>
+
 </html>
