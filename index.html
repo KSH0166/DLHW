@@ -1,247 +1,143 @@
-<!DOCTYPE html>
-<html>
+const vocabulary = {
 
-<head>
-    <title>My English Vocabulary App</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fb;
-            text-align: center;
-            margin: 0;
-            padding: 40px;
+    1: [
+        {
+            word: "small",
+            answer: "작은",
+            choices: ["작은", "높은", "빠른"]
+        },
+        {
+            word: "cold",
+            answer: "추운",
+            choices: ["뜨거운", "추운", "깨끗한"]
+        },
+        {
+            word: "clean",
+            answer: "깨끗한",
+            choices: ["더러운", "깨끗한", "조용한"]
+        },
+        {
+            word: "strong",
+            answer: "강한",
+            choices: ["약한", "강한", "느린"]
+        },
+        {
+            word: "quiet",
+            answer: "조용한",
+            choices: ["시끄러운", "조용한", "어두운"]
         }
+    ],
 
-        .app {
-            background-color: white;
-            width: 500px;
-            margin: auto;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    2: [
+        {
+            word: "borrow",
+            answer: "빌리다",
+            choices: ["빌리다", "팔다", "고르다"]
+        },
+        {
+            word: "invite",
+            answer: "초대하다",
+            choices: ["초대하다", "거절하다", "도착하다"]
+        },
+        {
+            word: "continue",
+            answer: "계속하다",
+            choices: ["멈추다", "계속하다", "시작하다"]
+        },
+        {
+            word: "discover",
+            answer: "발견하다",
+            choices: ["발견하다", "잃어버리다", "숨기다"]
+        },
+        {
+            word: "describe",
+            answer: "묘사하다",
+            choices: ["묘사하다", "복사하다", "삭제하다"]
         }
+    ],
 
-        h1 {
-            color: #3b6eea;
+    3: [
+        {
+            word: "consume",
+            answer: "소비하다",
+            choices: ["생산하다", "소비하다", "저장하다"]
+        },
+        {
+            word: "respond",
+            answer: "응답하다",
+            choices: ["질문하다", "응답하다", "무시하다"]
+        },
+        {
+            word: "maintain",
+            answer: "유지하다",
+            choices: ["변화시키다", "유지하다", "제거하다"]
+        },
+        {
+            word: "reduce",
+            answer: "줄이다",
+            choices: ["늘리다", "줄이다", "나누다"]
+        },
+        {
+            word: "influence",
+            answer: "영향을 미치다",
+            choices: ["영향을 미치다", "구별하다", "연결하다"]
         }
+    ],
 
-        .progress {
-            color: #777;
-            margin-bottom: 25px;
+    4: [
+        {
+            word: "essential",
+            answer: "필수적인",
+            choices: ["불필요한", "필수적인", "일시적인"]
+        },
+        {
+            word: "accurate",
+            answer: "정확한",
+            choices: ["정확한", "복잡한", "불공평한"]
+        },
+        {
+            word: "interpret",
+            answer: "해석하다",
+            choices: ["해석하다", "예측하다", "비교하다"]
+        },
+        {
+            word: "sufficient",
+            answer: "충분한",
+            choices: ["부족한", "충분한", "특별한"]
+        },
+        {
+            word: "distinguish",
+            answer: "구별하다",
+            choices: ["연결하다", "구별하다", "반복하다"]
         }
+    ],
 
-        .word {
-            font-size: 35px;
-            font-weight: bold;
-            margin: 25px 0;
-            color: #222;
+    5: [
+        {
+            word: "coherent",
+            answer: "일관성 있는",
+            choices: ["일관성 있는", "무관한", "불확실한"]
+        },
+        {
+            word: "allocate",
+            answer: "할당하다",
+            choices: ["할당하다", "수집하다", "감소시키다"]
+        },
+        {
+            word: "controversial",
+            answer: "논란이 많은",
+            choices: ["널리 알려진", "논란이 많은", "확실한"]
+        },
+        {
+            word: "undergo",
+            answer: "겪다",
+            choices: ["피하다", "겪다", "예방하다"]
+        },
+        {
+            word: "facilitate",
+            answer: "촉진하다",
+            choices: ["방해하다", "촉진하다", "중단하다"]
         }
+    ]
 
-        button {
-            display: block;
-            width: 80%;
-            margin: 12px auto;
-            padding: 14px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            background-color: #e8efff;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #cddcff;
-        }
-
-        #feedback {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 20px;
-            min-height: 25px;
-        }
-
-        #nextButton {
-            background-color: #3b6eea;
-            color: white;
-            display: none;
-        }
-
-        #nextButton:hover {
-            background-color: #2858c7;
-        }
-
-        #result {
-            font-size: 25px;
-            font-weight: bold;
-            color: #3b6eea;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="app">
-
-        <h1>📚 Vocabulary Quiz</h1>
-
-        <p class="progress" id="progress">Question 1 of 5</p>
-
-        <div class="word" id="word">
-            participate
-        </div>
-
-        <p>What does this word mean?</p>
-
-        <button onclick="checkAnswer('참여하다')">
-            참여하다
-        </button>
-
-        <button onclick="checkAnswer('피하다')">
-            피하다
-        </button>
-
-        <button onclick="checkAnswer('관찰하다')">
-            관찰하다
-        </button>
-
-        <h3 id="feedback"></h3>
-
-        <button id="nextButton" onclick="nextQuestion()">
-            Next Question →
-        </button>
-
-        <p id="result"></p>
-
-    </div>
-
-
-    <script>
-
-        // 5 vocabulary words
-        const questions = [
-            {
-                word: "participate",
-                answer: "참여하다",
-                choices: ["참여하다", "피하다", "관찰하다"]
-            },
-
-            {
-                word: "avoid",
-                answer: "피하다",
-                choices: ["만들다", "피하다", "기억하다"]
-            },
-
-            {
-                word: "improve",
-                answer: "향상시키다",
-                choices: ["잊다", "향상시키다", "빌리다"]
-            },
-
-            {
-                word: "require",
-                answer: "요구하다",
-                choices: ["요구하다", "설명하다", "선택하다"]
-            },
-
-            {
-                word: "achieve",
-                answer: "성취하다",
-                choices: ["성취하다", "실패하다", "기다리다"]
-            }
-        ];
-
-
-        let currentQuestion = 0;
-        let score = 0;
-
-
-        function showQuestion() {
-
-            const question = questions[currentQuestion];
-
-            document.getElementById("word").innerText = question.word;
-
-            document.getElementById("progress").innerText =
-                "Question " + (currentQuestion + 1) + " of 5";
-
-            document.getElementById("feedback").innerText = "";
-
-            document.getElementById("nextButton").style.display = "none";
-
-            const buttons = document.querySelectorAll(".app button");
-
-            buttons.forEach(function(button) {
-
-                if (button.id !== "nextButton") {
-                    button.innerText =
-                        question.choices[Array.from(buttons).indexOf(button)];
-
-                    button.onclick = function() {
-                        checkAnswer(this.innerText);
-                    };
-                }
-
-            });
-        }
-
-
-        function checkAnswer(answer) {
-
-            const question = questions[currentQuestion];
-
-            if (answer === question.answer) {
-
-                document.getElementById("feedback").innerText =
-                    "✅ Correct! Well done!";
-
-                score++;
-
-            }
-
-            else {
-
-                document.getElementById("feedback").innerText =
-                    "❌ Incorrect. The answer is " + question.answer + ".";
-
-            }
-
-            document.getElementById("nextButton").style.display = "block";
-
-        }
-
-
-        function nextQuestion() {
-
-            currentQuestion++;
-
-            if (currentQuestion < questions.length) {
-
-                showQuestion();
-
-            }
-
-            else {
-
-                document.getElementById("word").innerText = "🎉 Quiz Complete!";
-
-                document.getElementById("progress").innerText = "";
-
-                document.getElementById("feedback").innerText = "";
-
-                document.getElementById("nextButton").style.display = "none";
-
-                document.getElementById("result").innerText =
-                    "Your score: " + score + " / 5";
-
-            }
-        }
-
-
-        showQuestion();
-
-    </script>
-
-</body>
-
-</html>
+};
