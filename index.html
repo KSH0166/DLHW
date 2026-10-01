@@ -1,143 +1,37 @@
-const vocabulary = {
+function checkAnswer(answer) {
 
-    1: [
-        {
-            word: "small",
-            answer: "작은",
-            choices: ["작은", "높은", "빠른"]
-        },
-        {
-            word: "cold",
-            answer: "추운",
-            choices: ["뜨거운", "추운", "깨끗한"]
-        },
-        {
-            word: "clean",
-            answer: "깨끗한",
-            choices: ["더러운", "깨끗한", "조용한"]
-        },
-        {
-            word: "strong",
-            answer: "강한",
-            choices: ["약한", "강한", "느린"]
-        },
-        {
-            word: "quiet",
-            answer: "조용한",
-            choices: ["시끄러운", "조용한", "어두운"]
+    const question =
+        vocabulary[currentLevel][currentQuestion];
+
+    if (answer === question.answer) {
+
+        document.getElementById("feedback").innerText =
+            "잘했어! 축하해! 🎉";
+
+        score++;
+
+        // 정답을 맞히면 다음 문제 버튼 표시
+        document.getElementById("nextButton").style.display =
+            "block";
+
+    } else {
+
+        // 첫 번째 오답이면 한 번 더 기회
+        if (!question.tried) {
+
+            document.getElementById("feedback").innerText =
+                "다시 시도해봐! 💪";
+
+            question.tried = true;
+
+        } else {
+
+            // 두 번째에도 틀리면 정답 알려주기
+            document.getElementById("feedback").innerText =
+                "정답은 " + question.answer + "이야!";
+
+            document.getElementById("nextButton").style.display =
+                "block";
         }
-    ],
-
-    2: [
-        {
-            word: "borrow",
-            answer: "빌리다",
-            choices: ["빌리다", "팔다", "고르다"]
-        },
-        {
-            word: "invite",
-            answer: "초대하다",
-            choices: ["초대하다", "거절하다", "도착하다"]
-        },
-        {
-            word: "continue",
-            answer: "계속하다",
-            choices: ["멈추다", "계속하다", "시작하다"]
-        },
-        {
-            word: "discover",
-            answer: "발견하다",
-            choices: ["발견하다", "잃어버리다", "숨기다"]
-        },
-        {
-            word: "describe",
-            answer: "묘사하다",
-            choices: ["묘사하다", "복사하다", "삭제하다"]
-        }
-    ],
-
-    3: [
-        {
-            word: "consume",
-            answer: "소비하다",
-            choices: ["생산하다", "소비하다", "저장하다"]
-        },
-        {
-            word: "respond",
-            answer: "응답하다",
-            choices: ["질문하다", "응답하다", "무시하다"]
-        },
-        {
-            word: "maintain",
-            answer: "유지하다",
-            choices: ["변화시키다", "유지하다", "제거하다"]
-        },
-        {
-            word: "reduce",
-            answer: "줄이다",
-            choices: ["늘리다", "줄이다", "나누다"]
-        },
-        {
-            word: "influence",
-            answer: "영향을 미치다",
-            choices: ["영향을 미치다", "구별하다", "연결하다"]
-        }
-    ],
-
-    4: [
-        {
-            word: "essential",
-            answer: "필수적인",
-            choices: ["불필요한", "필수적인", "일시적인"]
-        },
-        {
-            word: "accurate",
-            answer: "정확한",
-            choices: ["정확한", "복잡한", "불공평한"]
-        },
-        {
-            word: "interpret",
-            answer: "해석하다",
-            choices: ["해석하다", "예측하다", "비교하다"]
-        },
-        {
-            word: "sufficient",
-            answer: "충분한",
-            choices: ["부족한", "충분한", "특별한"]
-        },
-        {
-            word: "distinguish",
-            answer: "구별하다",
-            choices: ["연결하다", "구별하다", "반복하다"]
-        }
-    ],
-
-    5: [
-        {
-            word: "coherent",
-            answer: "일관성 있는",
-            choices: ["일관성 있는", "무관한", "불확실한"]
-        },
-        {
-            word: "allocate",
-            answer: "할당하다",
-            choices: ["할당하다", "수집하다", "감소시키다"]
-        },
-        {
-            word: "controversial",
-            answer: "논란이 많은",
-            choices: ["널리 알려진", "논란이 많은", "확실한"]
-        },
-        {
-            word: "undergo",
-            answer: "겪다",
-            choices: ["피하다", "겪다", "예방하다"]
-        },
-        {
-            word: "facilitate",
-            answer: "촉진하다",
-            choices: ["방해하다", "촉진하다", "중단하다"]
-        }
-    ]
-
-};
+    }
+}
